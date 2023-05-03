@@ -6,27 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student's Registration</title>
 </head>
-<body>
+<body align="center" >
     <h1>Students Registration</h1>
     <th:block th:if="${session.msg}">
     <h3>[[${session.msg}]]</h3>
     </th:block>
-      <form action="createuser" method="post">
-        <table>
+      <form action="createuser" method="post" >
+        <table align="center">
             <tr>
                 <td>
-                    <th>National Id : </th>
+                    <th>Mail : </th>
                 </td>
                 <td>
-                    <input type="tel" maxlength="8" required name="id_Etudiant">
+                    <input type="text" required name="Mail">
                 </td>
             </tr>
-            <tr>
                 <td>
                     <th>Name : </th>
                 </td>
                 <td>
-                    <input type="text" required name="etu_Name">
+                    <input type="text" maxlength="8" required name="Name">
                 </td>
             </tr>
             <tr>
@@ -34,15 +33,24 @@
                     <th>Last Name : </th>
                 </td>
                 <td>
-                    <input type="text" required name="etu_LastName">
+                    <input type="text" required name="Last_Name">
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <th>Password : </th>
+                </td>
+                <td>
+                    <input type="text" required name="password">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <th>Classe : </th>
+                    <th>Classroom : </th>
                 </td>
                 <td>
-                    <input type="text" required name="etu_Classe">
+                    <input type="text"  name="classroom">
                 </td>
             </tr>
                 <td colspan="2"><button>Submit</button></td>

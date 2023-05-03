@@ -1,30 +1,42 @@
 package com.SpringApp.Project.entity;
 
+
+
+import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 
 @Entity
 public class Events {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_Event;
+	@Column(nullable = false)
 	private String Event_Name;
-	private String Registration_due;
+	@Column(nullable = false)
+	private LocalDate Registration_due;
+	@Column(nullable = false)
 	private String Description;
+	@Column(nullable = false)
 	private int Current_Participants_Number;
 	private int Max_Members;
-	private boolean Status;
 
-	@JsonIgnoreProperties(value = "eventsParticipated")
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER , mappedBy = "eventsParticipated")
-	private List<Student> participatedStudents;
+	@JsonIgnoreProperties(value = "participated_Events")
+	@ManyToMany(mappedBy = "participated_Events")
+	private List<Users> participated_Users;
+
 
 	public int getId_Event() {
 		return id_Event;
@@ -38,10 +50,10 @@ public class Events {
 	public void setEvent_Name(String event_Name) {
 		Event_Name = event_Name;
 	}
-	public String getRegistration_due() {
+	public LocalDate getRegistration_due() {
 		return Registration_due;
 	}
-	public void setRegistration_due(String registration_due) {
+	public void setRegistration_due(LocalDate registration_due) {
 		Registration_due = registration_due;
 	}
 	public String getDescription() {
@@ -62,21 +74,13 @@ public class Events {
 	public void setMax_Members(int max_Members) {
 		Max_Members = max_Members;
 	}
-	public boolean isStatus() {
-		return Status;
-	}
-	public void setStatus(boolean status) {
-		Status = status;
-	}
-	public Events(int id_Event, String event_Name, String registration_due, String description,
+	public Events( String event_Name, LocalDate registration_due, String description,
 			int current_Participants_Number, int max_Members, boolean status) {
-		this.id_Event = id_Event;
 		Event_Name = event_Name;
 		Registration_due = registration_due;
 		Description = description;
 		Current_Participants_Number = current_Participants_Number;
 		Max_Members = max_Members;
-		Status = status;
 	}
 
 	public Events() {
@@ -86,7 +90,7 @@ public class Events {
 	public String toString() {
 		return "Events [id_Event=" + id_Event + ", Event_Name=" + Event_Name + ", Registration_due=" + Registration_due
 				+ ", Description=" + Description + ", Current_Participants_Number=" + Current_Participants_Number
-				+ ", Max_Members=" + Max_Members + ", Status=" + Status + "]";
+				+ ", Max_Members=" + Max_Members +"]";
 	}
 	
 }
