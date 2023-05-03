@@ -1,0 +1,53 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student's Registration</title>
+</head>
+<body>
+    <h1>Students Registration</h1>
+    <th:block th:if="${session.msg}">
+    <h3>[[${session.msg}]]</h3>
+    </th:block>
+      <form action="createuser" method="post">
+        <table>
+            <tr>
+                <td>
+                    <th>National Id : </th>
+                </td>
+                <td>
+                    <input type="tel" maxlength="8" required name="id_Etudiant">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <th>Name : </th>
+                </td>
+                <td>
+                    <input type="text" required name="etu_Name">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <th>Last Name : </th>
+                </td>
+                <td>
+                    <input type="text" required name="etu_LastName">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <th>Classe : </th>
+                </td>
+                <td>
+                    <input type="text" required name="etu_Classe">
+                </td>
+            </tr>
+                <td colspan="2"><button>Submit</button></td>
+            </tr>
+        </table>
+      </form>
+</body>
+</html>
