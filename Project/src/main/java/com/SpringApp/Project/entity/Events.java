@@ -5,6 +5,7 @@ package com.SpringApp.Project.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class Events {
 	private int Max_Members;
 
 	@JsonIgnoreProperties(value = "participated_Events")
-	@ManyToMany(mappedBy = "participated_Events")
+	@ManyToMany(mappedBy = "participated_Events",cascade = CascadeType.ALL)
 	private List<Users> participated_Users;
 
 

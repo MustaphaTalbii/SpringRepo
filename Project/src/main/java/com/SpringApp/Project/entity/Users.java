@@ -4,6 +4,7 @@ package com.SpringApp.Project.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,7 +32,7 @@ public class Users {
 	private Role role ;
 
 	@JsonIgnoreProperties(value = "participated_Users")
-	@ManyToMany
+	@ManyToMany (cascade = CascadeType.ALL)
 	@JoinTable(name = "User_Event",joinColumns = {@JoinColumn(name ="User_Id",referencedColumnName = "Mail")},
 	inverseJoinColumns = {
 		@JoinColumn(name ="Event_Id",referencedColumnName = "id_Event")})
@@ -89,4 +90,11 @@ public class Users {
 	}
 	public Users() {
 	}
+	@Override
+	public String toString() {
+		return "Users [Name=" + Name + ", Last_Name=" + Last_Name + ", classroom=" + classroom
+				+ ", participated_Events=" + participated_Events + "]";
+	}
+	
 }
+

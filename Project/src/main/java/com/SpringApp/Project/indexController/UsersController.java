@@ -1,6 +1,5 @@
 package com.SpringApp.Project.indexController;
 
-import java.time.LocalDate;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,16 +36,18 @@ public class UsersController {
     boolean idtest = usersService.checkid_student(user.getMail());
     if (idtest){
         session.setAttribute("msg", "Email Allready Exists ! ");
+        Events test = eventsService.findbyid(1);
+        usersService.addEvent(user, test);
+        System.out.println(usersService.gettable(user.getMail()));
         
     }
     else 
-    {
-        LocalDate test = LocalDate.now();
-        Events event = new Events("testEvent",test,"Test Event",0,15,true);
-        eventsService.createeEvent(event);
+    {   
+        Events test = eventsService.findbyid(1);
+    
         user.setRole(Role.USER);
-        usersService.addEvent(user, event);
-        session.setAttribute("msg", " " + user.getName()+ " Welcome To Event Hub  !!");
+        usersService.createStudent(user);
+        session.setAttribute("msg", " " + user.getName()+ " welcome to event hub  !!");
     }
     return "StudentsSignUp"; 
 }
