@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import com.SpringApp.Project.Role;
 import com.SpringApp.Project.Services.EventsService;
 import com.SpringApp.Project.Services.UsersService;
@@ -33,20 +32,18 @@ public class UsersController {
 
     @PostMapping("/createuser")
     public String createuser(@ModelAttribute Users user,HttpSession session) {
-    boolean idtest = usersService.checkid_student(user.getMail());
+    boolean idtest = usersService.checkid_User(user.getMail());
     if (idtest){
-        session.setAttribute("msg", "Email Allready Exists ! ");
         Events test = eventsService.findbyid(1);
-        usersService.addEvent(user, test);
-        System.out.println(usersService.gettable(user.getMail()));
-        
+        boolean testadd = usersService.addEvent(user, test);
+        if (!testadd){
+            session.setAttribute("msg", "You Allready Have This Event ! ");
+        }
     }
     else 
     {   
-        Events test = eventsService.findbyid(1);
-    
         user.setRole(Role.USER);
-        usersService.createStudent(user);
+        usersService.create_Users(user);
         session.setAttribute("msg", " " + user.getName()+ " welcome to event hub  !!");
     }
     return "StudentsSignUp"; 

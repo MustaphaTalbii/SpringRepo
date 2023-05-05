@@ -1,11 +1,5 @@
 package com.SpringApp.Project.Services;
-
-
-
-
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +8,7 @@ import com.SpringApp.Project.Repos.UsersRepo;
 import com.SpringApp.Project.entity.Events;
 import com.SpringApp.Project.entity.Users;
 
-import antlr.debug.Event;
+
 
 
 @Service
@@ -27,35 +21,39 @@ public class UsersServiceIMP implements UsersService {
 	private EventsRepo eventsRepo;
 	
 	@Override
-	public Users createStudent(Users student) {
-	
+	public Users create_Users(Users student) {
 		return 	usersRepo.save(student);
 	}
 
 
 
 	@Override
-	public boolean checkid_student(String mail) {
+	public boolean checkid_User(String mail) {
 		return usersRepo.existsById(mail);
 	}
 	
 	@Override
-	public Users findstudents(){
+	public Users findUser(){
 		return usersRepo.findById("Mustapha.talbi@admintest.com").orElse(null);}
 
 
 
 	
 	@Override
-public void addEvent(Users user, Events event) {
-    List<Events> events = eventsRepo.findEventsByUserEmail(user.getMail());
-    events.add(event);
+public boolean addEvent(Users user, Events event) {
+    List<Events> events = user.getParticipated_Events();
+	if (events.contains(event)){
+		return true;
+	}
+		events.add(event);
     user.setParticipated_Events(events);
     usersRepo.save(user);
+	return false;
+	
 }
 
 	@Override
-	public List<Events> gettable(String email){
+	public List<Events> events_Table(String email){
 		return eventsRepo.findEventsByUserEmail(email);
 	}
 }
