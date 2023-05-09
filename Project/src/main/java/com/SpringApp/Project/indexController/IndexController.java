@@ -10,8 +10,4 @@ public class IndexController {
 	private String homeview() {
 		return "index";
 	}
-	@GetMapping("Students/Login")
-	private String Signup_Student() {
-		return "StudentsLogin";
-	}
 }

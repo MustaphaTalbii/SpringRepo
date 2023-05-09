@@ -1,6 +1,7 @@
 package com.SpringApp.Project.entity;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.SpringApp.Project.Role;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 
 
@@ -31,20 +30,9 @@ public class Users {
 	@Enumerated(EnumType.STRING)
 	private Role role ;
 
-	@JsonIgnoreProperties(value = "participated_Users")
-	@ManyToMany (cascade = CascadeType.ALL)
-	@JoinTable(name = "User_Event",joinColumns = {@JoinColumn(name ="User_Id",referencedColumnName = "Mail")},
-	inverseJoinColumns = {
-		@JoinColumn(name ="Event_Id",referencedColumnName = "id_Event")})
-	private List<Events> participated_Events = new ArrayList<Events>();
+	@ManyToMany(mappedBy = "users",cascade = CascadeType.REFRESH)
+    private List<Events> events = new ArrayList<Events>();
 
-
-	public void setParticipated_Events(List<Events> participated_Events) {
-		this.participated_Events = participated_Events;
-	}
-	public List<Events> getParticipated_Events() {
-		return participated_Events;
-	}
 	public String getName() {
 		return Name;
 	}
@@ -93,7 +81,17 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [Name=" + Name + ", Last_Name=" + Last_Name + ", classroom=" + classroom
-				+ ", participated_Events=" + participated_Events + "]";
+				+ ", participated_Events=" + "]";
+	}
+	public List<Events> getEvents() {
+		return events;
+	}
+	public void setEvents(List<Events> events) {
+		this.events = events;
+	}
+	public Users(String mail, String password) {
+		Mail = mail;
+		this.password = password;
 	}
 	
 }

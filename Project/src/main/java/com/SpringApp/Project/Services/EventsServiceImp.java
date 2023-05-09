@@ -2,7 +2,7 @@ package com.SpringApp.Project.Services;
 
 import com.SpringApp.Project.Repos.EventsRepo;
 import com.SpringApp.Project.entity.Events;
-
+import com.SpringApp.Project.entity.Users;
 
 import java.util.List;
 
@@ -28,5 +28,14 @@ public class EventsServiceImp implements EventsService{
     @Override
     public List<Events> findalla(){
         return eventsRepo.findAll();
+    }
+    public boolean deleteevent(Events event){
+        eventsRepo.delete(event);
+        return true;
+    }
+    public boolean adduser (Users user,Events event){
+        event.getUsers().add(user);
+        eventsRepo.save(event);
+        return true;
     }
 }
