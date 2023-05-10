@@ -9,4 +9,3 @@ import com.SpringApp.Project.entity.Users;
 public interface UsersRepo extends JpaRepository<Users,String>{
     
 }
-

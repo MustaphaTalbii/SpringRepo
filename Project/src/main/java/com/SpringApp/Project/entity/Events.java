@@ -3,7 +3,6 @@ package com.SpringApp.Project.entity;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,9 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -34,10 +34,10 @@ public class Events {
 	private int Current_Participants_Number;
 	private int Max_Members;
 
-	@ManyToMany(cascade = CascadeType.REFRESH)
-    @JoinTable(name = "users_events" , joinColumns = @JoinColumn (name = "event_id"),
-    inverseJoinColumns  = @JoinColumn(name = "events"))
-    private List<Users> users = new ArrayList<>();
+	@JsonIgnoreProperties(value = "participated_Events")
+	@ManyToMany(mappedBy = "participated_Events",cascade = CascadeType.ALL)
+	private List<Users> participated_Users;
+
 
 	public int getId_Event() {
 		return id_Event;
@@ -93,13 +93,5 @@ public class Events {
 				+ ", Description=" + Description + ", Current_Participants_Number=" + Current_Participants_Number
 				+ ", Max_Members=" + Max_Members +"]";
 	}
-	public List<Users> getUsers() {
-		return users;
-	}
-	public void setUsers(List<Users> users) {
-		this.users = users;
-	}
 	
 }
-
-
