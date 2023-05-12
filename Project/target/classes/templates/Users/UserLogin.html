@@ -9,6 +9,22 @@
 <body>
     <h1>etu</h1>
     <button><a th:href="@{/}">Go Back</a></button>
-    <button><a th:href="@{/UserSignUp}">Register</a></button>
+    
+    <h1>Login</h1>
+
+    <h3 th:text="${msg}"></h3>
+    <form method="post" th:action="@{/login}">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="Mail" required>
+        </div>
+        <br>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <p>Dont have an account ? </p><a th:href="@{/UserSignUp}">Register</a>
 </body>
 </html>
