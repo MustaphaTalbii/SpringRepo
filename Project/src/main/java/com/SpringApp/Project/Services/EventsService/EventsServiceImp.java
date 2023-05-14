@@ -1,4 +1,4 @@
-package com.SpringApp.Project.Services;
+package com.SpringApp.Project.Services.EventsService;
 
 import com.SpringApp.Project.Repos.EventsRepo;
 import com.SpringApp.Project.entity.Events;

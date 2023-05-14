@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, <span th:text="${user.getName}"></span>!</h1>
+    <p>Email: <span th:text="${user.getMail}"></span></p>
+    <p>Events : </p>
+    <table style="text-align: center;">
+        <tr>
+            <td>
+                Name 
+            </td>
+            <td>
+                Current Participants Number
+            </td>
+            <td>
+                Description
+            </td>
+        </tr>
+        <tr th:each="event : ${user.getParticipated_Events}">
+            <td>
+                <p th:text="${event.getEvent_Name}">
+
+                </p>
+            </td>
+            <td>
+                <p>
+                    <span th:text=" ${event.getCurrent_Participants_Number}"></span> / <span th:text=" ${event.getMax_Members}"></span>
+                </p>
+            </td>
+            <td>
+                <form th:action="@{/deleteEvent/{eventid}(eventid=${event.getId_Event})}" method="post">
+                    <input type="hidden" name="mail" th:value="${user.getMail}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

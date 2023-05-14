@@ -3,7 +3,6 @@ package com.SpringApp.Project.entity;
 
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,10 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
+import javax.persistence.ManyToOne;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -34,10 +33,16 @@ public class Events {
 	private int Current_Participants_Number;
 	private int Max_Members;
 
-	@JsonIgnoreProperties(value = "participated_Events")
-	@ManyToMany(mappedBy = "participated_Events",cascade = CascadeType.ALL)
-	private List<Users> participated_Users;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Events events;
 
+	public Events getEvents() {
+		return events;
+	}
+
+	public void setEvents(Events events) {
+		this.events = events;
+	}
 
 	public int getId_Event() {
 		return id_Event;
@@ -76,7 +81,7 @@ public class Events {
 		Max_Members = max_Members;
 	}
 	public Events( String event_Name, LocalDate registration_due, String description,
-			int current_Participants_Number, int max_Members, boolean status) {
+				   int current_Participants_Number, int max_Members, boolean status) {
 		Event_Name = event_Name;
 		Registration_due = registration_due;
 		Description = description;
@@ -93,5 +98,11 @@ public class Events {
 				+ ", Description=" + Description + ", Current_Participants_Number=" + Current_Participants_Number
 				+ ", Max_Members=" + Max_Members +"]";
 	}
-	
+
 }
+
+
+
+
+
+

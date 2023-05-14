@@ -1,8 +1,8 @@
 package com.SpringApp.Project.entity;
 
+import java.util.HashSet;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,12 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
+import javax.persistence.OneToMany;
 
 import com.SpringApp.Project.Role;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -31,18 +29,14 @@ public class Users {
 	@Enumerated(EnumType.STRING)
 	private Role role ;
 
-	@JsonIgnoreProperties(value = "participated_Users")
-	@ManyToMany (cascade = CascadeType.ALL)
-	@JoinTable(name = "User_Event",joinColumns = {@JoinColumn(name ="User_Id",referencedColumnName = "Mail")},
-	inverseJoinColumns = {
-		@JoinColumn(name ="Event_Id",referencedColumnName = "id_Event")})
-	private List<Events> participated_Events = new ArrayList<Events>();
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="events")
+	private Set<Events> participated_Events = new HashSet<Events>();
 
 
-	public void setParticipated_Events(List<Events> participated_Events) {
+	public void setParticipated_Events(Set<Events> participated_Events) {
 		this.participated_Events = participated_Events;
 	}
-	public List<Events> getParticipated_Events() {
+	public Set<Events> getParticipated_Events() {
 		return participated_Events;
 	}
 	public String getName() {
@@ -95,6 +89,6 @@ public class Users {
 		return "Users [Name=" + Name + ", Last_Name=" + Last_Name + ", classroom=" + classroom
 				+ ", participated_Events=" + participated_Events + "]";
 	}
-	
+
 }
 

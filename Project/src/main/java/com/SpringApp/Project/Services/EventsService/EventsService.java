@@ -1,4 +1,4 @@
-package com.SpringApp.Project.Services;
+package com.SpringApp.Project.Services.EventsService;
 
 import java.util.List;
 
