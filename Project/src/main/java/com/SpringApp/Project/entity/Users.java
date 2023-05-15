@@ -31,7 +31,6 @@ public class Users {
 	private String classroom;
 	@Enumerated(EnumType.STRING)
 	private Role role ;
-
 	@ManyToMany(mappedBy = "users")
 	private Set<Events> participated_Events;
 
@@ -78,7 +77,7 @@ public class Users {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	public Users(String mail, String name, String last_Name, String password, String classroom) {
+	public Users(String mail, String name, String last_Name, String password,String classroom) {
 		Name = name;
 		Last_Name = last_Name;
 		Mail = mail;
@@ -86,6 +85,7 @@ public class Users {
 		this.classroom = classroom;
 		this.participated_Events =  new HashSet<Events>();
 		this.role = Role.USER;
+		
 	}
 	public Users() {
 	}

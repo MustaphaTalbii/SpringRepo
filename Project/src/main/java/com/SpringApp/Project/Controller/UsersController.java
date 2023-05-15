@@ -58,8 +58,6 @@ public String login(@ModelAttribute Users user, Model model) {
         model.addAttribute("msg", "Password is incorrect");
         return "Users/UserLogin";
     } else {
-        Events event = eventsRepo.findById(2).orElse(null);
-        System.out.println(event.getUsers());
         
         model.addAttribute("user", loginUser);
         return "Users/HomeView";
