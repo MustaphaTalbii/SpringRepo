@@ -19,4 +19,8 @@ public class IndexController {
     public String UserLonin(){
         return "Users/UserLogin";
     }
+    @GetMapping("/home")
+    public String Home(){
+        return "index";
+    }
 }

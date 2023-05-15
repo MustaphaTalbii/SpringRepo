@@ -9,5 +9,6 @@ public interface UsersService {
 	public boolean checkid_User(String mail);
 	public Users findUser();
 	public boolean addEvent(Users user,Events event);
-	
+	public void deleteEvent(String userid,int eventid);
+	public void deleteUser(Users mail);
 }

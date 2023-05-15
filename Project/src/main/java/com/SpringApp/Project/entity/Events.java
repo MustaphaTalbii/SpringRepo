@@ -3,6 +3,7 @@ package com.SpringApp.Project.entity;
 
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,8 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import java.util.Set;
 
 
 
@@ -33,15 +38,20 @@ public class Events {
 	private int Current_Participants_Number;
 	private int Max_Members;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Events events;
+	@ManyToMany
+    @JoinTable(
+        name = "user_event",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+	private Set <Users> users = new HashSet<>();
 
-	public Events getEvents() {
-		return events;
+	public Set<Users> getUsers() {
+		return users;
 	}
 
-	public void setEvents(Events events) {
-		this.events = events;
+	public void setUsers(Set<Users> users) {
+		this.users = users;
 	}
 
 	public int getId_Event() {

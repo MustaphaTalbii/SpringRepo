@@ -10,10 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.SpringApp.Project.Role;
+import com.fasterxml.jackson.core.sym.Name;
 
 
 
@@ -29,8 +32,8 @@ public class Users {
 	@Enumerated(EnumType.STRING)
 	private Role role ;
 
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="events")
-	private Set<Events> participated_Events = new HashSet<Events>();
+	@ManyToMany(mappedBy = "users")
+	private Set<Events> participated_Events;
 
 
 	public void setParticipated_Events(Set<Events> participated_Events) {
@@ -81,6 +84,8 @@ public class Users {
 		Mail = mail;
 		this.password = password;
 		this.classroom = classroom;
+		this.participated_Events =  new HashSet<Events>();
+		this.role = Role.USER;
 	}
 	public Users() {
 	}

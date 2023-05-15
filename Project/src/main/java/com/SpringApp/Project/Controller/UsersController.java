@@ -15,6 +15,7 @@ import com.SpringApp.Project.Role;
 import com.SpringApp.Project.Repos.EventsRepo;
 import com.SpringApp.Project.Repos.UsersRepo;
 import com.SpringApp.Project.Services.UsersService.UsersService;
+import com.SpringApp.Project.entity.Events;
 import com.SpringApp.Project.entity.Users;
 
 
@@ -50,7 +51,6 @@ public String dashboard(){
 @PostMapping("/HomeView")
 public String login(@ModelAttribute Users user, Model model) {
     Users loginUser = usersRepo.findById(user.getMail()).orElse(null);
-
     if (loginUser == null) {
         model.addAttribute("msg", "Email Dosent Exist");
         return "Users/UserLogin";
@@ -58,16 +58,17 @@ public String login(@ModelAttribute Users user, Model model) {
         model.addAttribute("msg", "Password is incorrect");
         return "Users/UserLogin";
     } else {
-        usersService.addEvent(loginUser, eventsRepo.findById(6).orElse(null));
+        Events event = eventsRepo.findById(2).orElse(null);
+        System.out.println(event.getUsers());
+        
         model.addAttribute("user", loginUser);
         return "Users/HomeView";
     }
 } 
 @PostMapping("/deleteEvent/{eventid}")
 public String deletEvent(@PathVariable int eventid, @RequestParam String mail, Model model) {
+    usersService.deleteEvent(mail, eventid);
     Users user = usersRepo.findById(mail).orElse(null);
-        user.getParticipated_Events().remove(eventsRepo.findById(eventid).orElse(null));
-        usersRepo.save(user);
     model.addAttribute("user", user);
     return "Users/HomeView";
 }
