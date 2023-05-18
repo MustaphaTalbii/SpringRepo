@@ -32,19 +32,19 @@
     
     <h1 style="text-align: center;">Login</h1>
 
-    <h3 th:text="${msg}"></h3>
-    <form method="post" th:action="@{/HomeView}" style="text-align: center;">
+    <h3 th:text="${msg}" style="text-align: center;"></h3>
+    <form th:action="@{/Users/HomeView}" method="post">
         <div>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="Mail" required>
+            <input type="email" id="email" name="email" required>
         </div>
-        <br>
         <div>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <br>
-        <button type="submit">Login</button>
+        <div>
+            <button type="submit">Login</button>
+        </div>
     </form>
     <p style="text-align: center;">Dont have an account ? <a th:href="@{/UserSignUp}">Register</a> </p>
 </body>

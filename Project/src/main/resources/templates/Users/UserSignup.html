@@ -30,10 +30,15 @@
       </div>
   </nav>
     <h1 style="text-align: center;">Students Registration</h1>
-    <th:block th:if="${LogMsg}">
-    <h3 th:text="${LogMsg}"></h3>
+    <th:block th:if="${msg}">
+    <br>
+    <h4 style="text-align: center;">
+        <span th:text="${msg}"></span>
+       <a th:href='@{/UserLogin}'>Log In</a>
+    </h4>
+    <br>
     </th:block>
-      <form action="createuser" method="post" >
+      <form th:action="@{/createuser}" method="post" >
         <table align="center">
             <tr>
                 <td>

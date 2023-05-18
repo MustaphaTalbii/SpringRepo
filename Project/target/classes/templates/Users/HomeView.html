@@ -8,42 +8,66 @@
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   </head>
-<body>
-    <button><a th:href="@{/home}">logout</a></button>
-    <h1>Welcome, <span th:text="${user.getName}"></span>!</h1>
-    <p>Email: <span th:text="${user.getMail}"></span></p>
-    <p>Events : </p>
-    <table style="text-align: center;">
-        <tr>
-            <td>
-                Name 
-            </td>
-            <td>
-                Current Participants Number
-            </td>
-            <td>
-                Description
-            </td>
-        </tr>
-        <tr th:each="event : ${user.getParticipated_Events}">
-            <td>
-                <p th:text="${event.getEvent_Name}">
+  <body>
+  <nav class="navbar navbar-expand-lg py-4 bg-body-tertiary" data-bs-theme="dark">
+           
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" th:href="@{/}">Home</i></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" th:href="@{/UserLogin}">Log In</i></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" th:href="@{/}">Sign Out</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <h1>Welcome, <span th:text="${user.getName}"></span>!</h1>
+  <div th:if="${user.getParticipated_Events.isEmpty()}">
+    <h4>Looks like you are not participating in any events </h4>
+    <h5>Check out our events from here <a th:href="@{/events}">Browse Events</a></h5>
+  </div>
+ <div th:if="${not user.getParticipated_Events.isEmpty()}">
+  <table style="text-align: center;">
+    <tr>
+        <td>
+            Name 
+        </td>
+        <td>
+            Current Participants Number
+        </td>
+        <td>
+            Description
+        </td>
+    </tr>
+    <tr th:each="event : ${session.user.getParticipated_Events}">
+        <td>
+            <p th:text="${event.getEvent_Name}">
 
-                </p>
-            </td>
-            <td>
-                <p>
-                    <span th:text=" ${event.getCurrent_Participants_Number}"></span> / <span th:text=" ${event.getMax_Members}"></span>
-                </p>
-            </td>
-            <td>
-                <form th:action="@{/deleteEvent/{eventid}(eventid=${event.getId_Event})}" method="post">
-                    <input type="hidden" name="mail" th:value="${user.getMail}" />
-                    <button type="submit" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i></button>
-                </form>
-            </td>
-        </tr>
-    </table>
+            </p>
+        </td>
+        <td>
+            <p>
+                <span th:text=" ${event.getCurrent_Participants_Number}"></span> / <span th:text=" ${event.getMax_Members}"></span>
+            </p>
+        </td>
+        <td>
+            <form th:action="@{/deleteEvent/{eventid}(eventid=${event.getId_Event})}" method="post">
+                <input type="hidden" name="mail" th:value="${user.getMail}"/>
+                <button type="submit" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i></button>
+            </form>
+        </td>
+    </tr>
+</table>
+ </div>
+  <a th:href="@{/events}">click</a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>

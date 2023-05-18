@@ -1,7 +1,8 @@
 package com.SpringApp.Project.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -31,8 +33,9 @@ public class Users {
 	private String classroom;
 	@Enumerated(EnumType.STRING)
 	private Role role ;
-	@ManyToMany(mappedBy = "users")
-	private Set<Events> participated_Events;
+
+	@ManyToMany(fetch = FetchType.EAGER,mappedBy = "users")
+	private Set<Events> participated_Events = new HashSet<Events>();
 
 
 	public void setParticipated_Events(Set<Events> participated_Events) {
@@ -83,7 +86,6 @@ public class Users {
 		Mail = mail;
 		this.password = password;
 		this.classroom = classroom;
-		this.participated_Events =  new HashSet<Events>();
 		this.role = Role.USER;
 		
 	}
@@ -96,4 +98,3 @@ public class Users {
 	}
 
 }
-

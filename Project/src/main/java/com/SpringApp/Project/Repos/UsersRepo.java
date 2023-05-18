@@ -10,4 +10,6 @@ import com.SpringApp.Project.entity.Users;
 @Repository
 public interface UsersRepo extends JpaRepository<Users,String>{
 
+    Object saetuuserr = null;
+
 }

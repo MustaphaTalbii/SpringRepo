@@ -17,10 +17,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                   <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                      <a class="nav-link active" aria-current="page" th:href="@{/}">Home</i></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" th:href="@{/UserLogin}">Log In</a>
+                      <a class="nav-link" th:href="@{/UserLogin}">Log In</i></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" th:href="@{/UserSignUp}">Sign Up</a>
@@ -31,6 +31,9 @@
   </nav>
   <div class="container text-center my-5">
       <h1>Welcome To Event Hub</h1>
+      <p style="text-align: center;">Event Hub is a platform dedicated to providing a space for computer
+         science enthusiasts to connect and participate in a variety of events related to the field.</p>
+         
       <button><a th:href="@{/UserLogin}">LogIn</a></button>
       <button><a th:href="@{/UserSignUp}">SignUp</a></button>
   </div>

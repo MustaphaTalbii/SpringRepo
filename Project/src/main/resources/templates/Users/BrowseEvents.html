@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Welcome, <span th:text="${user.getName}"></span>!</h1>
+    <a th:href="@{/Users/Home}">Go Back To Profile</a>
+    <table>
+       <tr>
+        <td>
+            Name       
+        </td>
+        <td>
+            Registration Due      
+        </td>
+       </tr>
+      <tr th:each="event : ${events}">
+             <td>
+                   <p th:text="${event.getEvent_Name}"></p>
+
+               </td>
+               <td>
+                   <p th:text="${event.getRegistration_due}"></p>
+               </td>
+               <td>
+                <form th:action="@{/Event/{eventid}(eventid=${event.getId_Event})}" method="post">
+                    <button type="submit" class="btn btn-outline-danger">click</i></button>
+                </form>
+            </td>
+     </tr>
+    </table>
+        
+       
+</body>
+</html>
